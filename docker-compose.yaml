@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: ./albert-einstein-chatgpt-api
+    container_name: albert-einstein-chatgpt-api
+    image: albert-einstein-chatgpt-api:latest
+    volumes:
+      - albert-einstein-chatgpt-api:/data/api
+    ports:
+     - "3000:3000"
+    expose:
+      - "3000"
+    restart: unless-stopped
+    networks:
+      - backend
+
+  frontend:
+    build:
+      context: ./albert-einstein-chatbot-web
+    container_name: albert-einstein-chatbot-web
+    image: albert-einstein-chatbot-web:latest
+    ports:
+     - "8000:8000"
+    expose:
+      - "8000"
+    volumes:
+      - albert-einstein-chatbot-web:/data/web
+    restart: always
+    depends_on:
+      - "backend"
+    networks:
+      - backend
+
+volumes:
+  albert-einstein-chatbot-web: {}
+  albert-einstein-chatgpt-api: {}
+
+networks:
+  backend:
+    driver: bridge

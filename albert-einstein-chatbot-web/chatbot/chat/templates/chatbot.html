@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+	<title>{{titulo}}</title>
+	<style type="text/css">
+
+	/* CSS CHAT */
+	.dot {
+		height: 13px;
+		width: 13px;
+		background-color: lightgreen;
+		border-radius: 50%;
+		display: inline-block;
+	}
+	.bubble {
+		  --r: 25px; /* the radius */
+		  --t: 30px; /* the size of the tail */
+
+		  max-width: 334px;
+		  padding: calc(2*var(--r)/3);
+		  -webkit-mask:
+			radial-gradient(var(--t) at var(--_d) 0,#0000 98%,#000 102%)
+			  var(--_d) 100%/calc(100% - var(--r)) var(--t) no-repeat,
+			conic-gradient(at var(--r) var(--r),#000 75%,#0000 0)
+			  calc(var(--r)/-2) calc(var(--r)/-2) padding-box,
+			radial-gradient(50% 50%,#000 98%,#0000 101%)
+			  0 0/var(--r) var(--r) space padding-box;
+		  background: linear-gradient(135deg,#8000ff,#1384C5) border-box;
+		  color: #fff;
+		}
+		.left {
+		  --_d: 0%;
+		  border-left: var(--t) solid #0000;
+		  margin-right: var(--t);
+		  place-self: start;
+		}
+		.right {
+		  --_d: 100%;
+		  border-right: var(--t) solid #0000;
+		  margin-left: var(--t);
+		  place-self: end;
+		}
+		.form-control {
+	      width: 96%;
+	      margin-left: 7px;
+	      margin-right: 12px;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm" style="background-color: #337ab7">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link text-white" href="#">
+					<span class="dot"></span>&nbsp;Albert Einstein Chatbot
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<br>
+	<div>
+		<div style="overflow-y: scroll; height: 300px;" id="msg">
+			<div class="bubble left" >
+				<p>Olá! Seja bem vindo(a) ao Albert Einstein Chatbot! Digite aqui sua dúvida relacionada aos nossos cursos!</p>
+			</div>
+		</div>
+		<input type="text" id="input" class="form-control"
+		onkeypress="return Send(event)" placeholder="Digite a sua mensagem e tecle Enter...">
+	</div>
+
+	<script type="text/javascript">
+		function Send(e) {
+			if(e.keyCode == 13) {
+				ask();
+				return false;
+			}
+		}
+
+		function ask() {
+			const Input = document.getElementById('input');
+			const question = Input.value.toString().trim();
+
+			const msg = document.getElementById('msg');
+
+			let msgLines = msg.innerHTML;
+			msgLines = msgLines.replace('<a href="#" id="end">', '');
+
+			const http = new XMLHttpRequest();
+			http.open('GET', `/chat/chatbot/${question}`, true);
+			http.setRequestHeader('Content-Type', 'application/json');
+
+
+			http.onreadystatechange = function() {
+				if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+					let objJSON = JSON.parse(http.responseText);
+					if(objJSON.length>0) {
+
+						const input = question;
+						const output = objJSON[0].response.toString().trim();
+
+						msgLines +=
+						`
+						<br>
+						<div class="bubble right">${input}</div>
+
+						<br>
+						<div class="bubble left">${output}</div>
+
+						<a href="#" id="end">
+						`;
+						document.getElementById('input').value = '';
+						msg.innerHTML = msgLines;
+						window.location.href = '#end';
+						document.getElementById('input').focus();
+					}
+				}
+			}
+			http.send();
+		}
+		window.location.href = '#end';
+		document.getElementById('input').focus();
+	</script>
+</body>
+</html>

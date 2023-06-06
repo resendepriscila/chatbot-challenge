@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Página Home</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+        .sidebar {
+            background-color: #f1f1f1;
+            width: 200px;
+            padding: 20px;
+            float: right;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        .welcome-message {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .button-chatbot{
+            transition: all 0.5s;
+            cursor: pointer;
+            background: #337ab7;
+            color: #fff;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #eee;
+            text-shadow: none;
+            height: 40px;
+            width: 100px;
+        }
+
+        .button-chatbot:hover{
+            -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+            background: #016ABC;
+            color: #fff;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #eee;
+            text-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="logo" href="/"><img src="https://www.einstein.br/Style%20Library/components/newHome/img/Group%207004.png"></a>
+        <h1 style="color: #337ab7">Bem-vindo(a) ao Chatbot do Albert Einstein Academy!</h1>
+    </header>
+
+
+    <div class="welcome-message">
+        <p>Aqui você pode interagir com o nosso Chatbot inteligente e obter respostas para suas perguntas.</p>
+    </div>
+    <br>
+    <div align="center">
+        <input class="button-chatbot" type="button" id="btn-chatbot" value="Chatbot"
+               onclick="window.open('http://127.0.0.1:8000/chat/chatbot', '', 'width=410,height=450')">
+    </div>
+</body>
+</html>
