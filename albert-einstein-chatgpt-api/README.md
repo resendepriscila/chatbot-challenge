@@ -1,4 +1,4 @@
-# Albert Einstein ChatGPT API Consumer
+# ChatGPT API Consumer
 
 ### Description
     This API is responsible for consume ChatGPT API.
@@ -71,19 +71,19 @@
         inside the .env file that is in the root of the project. </em> 
 
     ```bash
-      docker build -t albert-einstein-chatgpt-api:<API_VERSION> .
+      docker build -t chatgpt-api:<API_VERSION> .
     ```
 
 2. Creating the tag:
 
    ```bash
-      docker tag albert-einstein-chatgpt-api:<API_VERSION> <TARGET_IMAGE>/albert-einstein-chatgpt-api:<API_VERSION>
+      docker tag chatgpt-api:<API_VERSION> <TARGET_IMAGE>/chatgpt-api:<API_VERSION>
    ```
 
 3. Run imagem:
 
    ```bash
-      docker run -d -p 3000:3000 albert-einstein-chatgpt-api:<API_VERSION>
+      docker run -d -p 3000:3000 chatgpt-api:<API_VERSION>
    ```
 
 # Fine Tuning
@@ -107,7 +107,7 @@ Creating the ChatGPT template specialization to meet Albert Einstein Academy exp
    pip install pandas
    ````
 
-5. In the directory: <strong>app/resources/chatgpt</strong> there is a file <strong>"albert-einstein_prepared.jsonl"</strong> with data for training a new model. The idea is to create a specialization of the ChatGPT template: <strong>Davinci</strong>. Access the mentioned directory through the terminal.
+5. In the directory: <strong>app/resources/chatgpt</strong> there is a file <strong>"prepared.jsonl"</strong> with data for training a new model. The idea is to create a specialization of the ChatGPT template: <strong>Davinci</strong>. Access the mentioned directory through the terminal.
 
 ### Prepare model in ChatGPT
 
@@ -116,7 +116,7 @@ Creating the ChatGPT template specialization to meet Albert Einstein Academy exp
    ```
    Example:
       ```
-      openai tools fine_tunes.prepare_data -f albert-einstein_prepared.jsonl
+      openai tools fine_tunes.prepare_data -f prepared.jsonl
       ```
 
 ### Creating model in ChatGPT
@@ -126,7 +126,7 @@ openai api fine_tunes.create -t <filename.json> -m 'model-name'
 ```
    Example:
 ```bash
-openai api fine_tunes.create -t albert-einstein_prepared.jsonl -m davinci
+openai api fine_tunes.create -t prepared.jsonl -m davinci
 ```
    <strong>Obs: </strong> At this time, the processing will enter a queue to be processed. It might take a few minutes.
    In the terminal you will be able to follow the progress of the queue.
