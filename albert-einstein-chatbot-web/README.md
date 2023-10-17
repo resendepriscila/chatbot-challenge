@@ -6,7 +6,7 @@
 ### Docker
 
 1. Building docker image:
-   - <em> Before doing the build, got to file in directory: chatbot/chat/view.py and add the name of the custom model created through instructions in README.md in the project: "albert-einstein-chatgpt-api"</em> 
+   - <em> Before doing the build, got to file in directory: chatbot/chat/view.py and add the name of the custom model created through instructions in README.md in the project: "chatgpt-api"</em> 
        
     ```bash
       docker build -t chatbot-web:<APP_VERSION> .
@@ -15,7 +15,7 @@
 2. Creating the tag:
 
     ```bash
-      docker tag chatbot-web:<APP_VERSION> <TARGET_IMAGE>/albert-einstein-chatbot-web:<APP_VERSION>
+      docker tag chatbot-web:<APP_VERSION> <TARGET_IMAGE>/chatbot-web:<APP_VERSION>
     ```
 
 3. Run imagem:
