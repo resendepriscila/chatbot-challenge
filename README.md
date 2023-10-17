@@ -1,10 +1,10 @@
-# Albert Einstein Chatbot Challenge
+# Chatbot Challenge
 
 #### Description
 This directory comprises the projects:
 
-1. <strong>albert-einstein-chatgpt-api:</strong> Project with the responsibility of consuming the Chatgpt API.
-2. <strong>albert-einstein-chatbot-web:</strong> User interface. It will integrate with albert-einstein-chatgpt-api.
+1. <strong>chatgpt-api:</strong> Project with the responsibility of consuming the Chatgpt API.
+2. <strong>chatbot-web:</strong> User interface. It will integrate with albert-einstein-chatgpt-api.
 For more information, see the README.md at the root of each project.
 
 #### Running the application through docker-compose:
